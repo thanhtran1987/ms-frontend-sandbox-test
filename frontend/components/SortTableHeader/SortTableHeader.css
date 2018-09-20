@@ -1,0 +1,9 @@
+@import "common.css";
+
+.tableHeader button {
+  padding: 0 0 0 5px;
+}
+.headerIndex {
+  padding: 0 0 0 5px;
+  color: $colorOrange;
+}

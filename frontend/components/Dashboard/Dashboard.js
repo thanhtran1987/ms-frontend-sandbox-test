@@ -1,23 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {
-  Button,
-  ButtonToolbar,
-  ButtonGroup
-} from 'react-bootstrap';
+import React from "react";
+import { connect } from "react-redux";
+import { Button, ButtonToolbar, ButtonGroup } from "react-bootstrap";
 
-import {
-  getRoutePath
-} from 'CommonUtil/CommonUtil.js';
+import { getRoutePath } from "CommonUtil/CommonUtil.js";
+import { SortTableData } from "Global/Fixture.js";
+
+import SortTable from "SortTable/SortTable.js";
 
 export class Dashboard extends React.Component {
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
@@ -26,11 +21,18 @@ export class Dashboard extends React.Component {
         <h1>Dashboard</h1>
         <ButtonToolbar>
           <ButtonGroup>
-            <Button onClick={() => this.context.router.push(getRoutePath('sample')) } >Go to sample page</Button>
+            <Button
+              onClick={() => this.context.router.push(getRoutePath("sample"))}
+            >
+              Go to sample page
+            </Button>
           </ButtonGroup>
         </ButtonToolbar>
-        <p style={{marginTop:32}}>Place your sample below this line (Dashboard/Dashboard.js):</p>
-        <hr style={{border: '1px solid black'}} />
+        <p style={{ marginTop: 32 }}>
+          Place your sample below this line (Dashboard/Dashboard.js):
+        </p>
+        <hr style={{ border: "1px solid black" }} />
+        <SortTable rows={SortTableData} />
       </div>
     );
   }
@@ -42,10 +44,7 @@ Dashboard.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-export default connect(
-  function (storeState) {
-    // store state to props
-    return {
-    };
-  }
-)(Dashboard);
+export default connect(function(storeState) {
+  // store state to props
+  return {};
+})(Dashboard);

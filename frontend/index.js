@@ -10,30 +10,29 @@
 //   - webpack.config.js (@see main-webpack.yasnippet)
 //   - .babelrc (file contents: {"presets": ["react", "es2015"], "plugins": ["transform-object-rest-spread"]})
 
-require('es5-shim'); //ie 9
+require("es5-shim"); //ie 9
 
 // Client entry point
-import React from 'react';
-import { Router, browserHistory } from 'react-router';
-import { render } from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'; // reducer could resolve the promise
-import { Provider } from 'react-redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'; // route saved into store
-import {
-  getRoutePath
-} from 'CommonUtil/CommonUtil.js';
-import MSNotification from 'MSNotification/MSNotification.js';
-import rootReducer from 'Global/RootReducer.js';
+import React from "react";
+import { Router, browserHistory } from "react-router";
+import { render } from "react-dom";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+
+import thunk from "redux-thunk"; // reducer could resolve the promise
+import { Provider } from "react-redux";
+import { syncHistoryWithStore, routerReducer } from "react-router-redux"; // route saved into store
+import { getRoutePath } from "CommonUtil/CommonUtil.js";
+import MSNotification from "MSNotification/MSNotification.js";
+import rootReducer from "Global/RootReducer.js";
 // Initialize store
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
   combineReducers({
-    app:rootReducer,
+    app: rootReducer,
     routing: routerReducer
   }),
-  {}, /* initial state */
+  {} /* initial state */,
   // redux-devtools extension
   // https://github.com/zalmoxisus/redux-devtools-extension
   // - Install Chrome/Firefox addon
@@ -52,7 +51,7 @@ class App extends React.Component {
 
   render() {
     // "a full width container, spanning the entire width of your viewport', quoted from bootstrap docuemntation
-    return(
+    return (
       <div>
         <MSNotification />
         {this.props.children}
@@ -84,16 +83,16 @@ const rootRoute = {
     getComponent: (nextState, cb) => {
       require.ensure([], require => {
         // use [yas] elisp error: Symbol's value as variable is void: \./Home/Home\.js if you prefer relative index.js
-        cb(null, require('Dashboard/Dashboard.js').default);
+        cb(null, require("Dashboard/Dashboard.js").default);
       });
     }
   },
   childRoutes: [
     {
-      path: 'sample',
-      getComponent:(nextState, cb) => {
+      path: "sample",
+      getComponent: (nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('Sample/Sample.js').default);
+          cb(null, require("Sample/Sample.js").default);
         });
       }
     }
@@ -103,9 +102,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
-    <Router history={history}>
-      {rootRoute}
-    </Router>
+    <Router history={history}>{rootRoute}</Router>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById("app")
 );
